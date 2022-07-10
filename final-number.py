@@ -29,7 +29,6 @@ def is_winner(random_number, final_number, sub):
         
     else:
         return False
-    
 
 def extreme_mode():
     pass
