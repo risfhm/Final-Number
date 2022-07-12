@@ -25,8 +25,8 @@ def update_name(new_name):
 
 def parsing():
     
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-n", "--name", help="get your name", type=str)
+    parser = argparse.ArgumentParser(prog="final-number")
+    parser.add_argument("-n", "--name", help="get your new name", type=str)
     
     args = parser.parse_args()
     
