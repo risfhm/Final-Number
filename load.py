@@ -34,7 +34,3 @@ def parsing():
         return update_name(args.name)
     
     return False
-
-    
-    
-    
