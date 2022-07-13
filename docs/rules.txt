@@ -1,0 +1,17 @@
+
+                          =========++ RULES OF GAME ++=========
+
+
+    - A game of chance of choices.
+    
+      - It is necessary to choose 2 values only.
+    
+      - One of these values will be the final number and the other will be the subtractor number.
+    
+      - There will be a list of numbers, where one of them will be chosen at random.
+    
+      - The random number chosen from this list will be subtracted by the value
+        chosen from number subtractor
+    
+      - The result that will come from this operation must be equal to the final chosen number,
+        being the element that determines the game, hence the name "final number".
