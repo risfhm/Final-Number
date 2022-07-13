@@ -4,9 +4,9 @@ from random import randint
 from os import system
 from sys import platform
 
-from src.load import parsing, get_name
+from load import parsing, get_name
 
-PATH="docs/rules.txt"
+PATH="../docs/rules.txt"
 
 tries = 0
 salt = 0

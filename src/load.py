@@ -4,7 +4,7 @@
 import json
 import argparse
 
-PATH="config/config.json"
+PATH="../config/config.json"
 
 def get_name():
     
