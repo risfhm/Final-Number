@@ -1,78 +1,80 @@
 #!/usr/bin/env python3
 
 from random import randint
-from os import system
-from sys import platform
+from rich.table import Table
+from rich.panel import Panel
+from rich.console import Console
 
 from load import parsing, get_name
+from utils import *
 
 PATH="../docs/rules.txt"
 
 tries = 0
 salt = 0
-victorys = 0
 defeats = 0
 
-# --------------------------------------------------------------------
 
 def help():
+    clear()
 
-    with open(PATH, "r") as f:
-        for i in f.readlines():
-            print(i)
+    with open(PATH, "r") as file:
+        for line in file.readlines():
+            print(line)
     
     exit(0)
     
-# --------------------------------------------------------------------
-
-def clear():
-    
-    platforms = {
-        "linux":"clear",
-        "linux2":"clear",
-        "win32":"cls",
-        "darwin":"clear"
-    }
-    
-    if platform in platforms:
-        system(platforms[platform])
-
-# --------------------------------------------------------------------
 
 def menu():
+    clear()
+    print(MENU)    
 
-    print("""
--=-=- Final Number -=-=-
-          
-[1] Casual Mode 
-[2] Extreme Mode
-[3] Help
-[4] Exit
-    """)
-
-# --------------------------------------------------------------------
 
 def diff_menu():
-
-    clear()
-
-    print("""  
--=-=- Difficulty Menu -=-=-
-          
-[1] Easy 
-[2] Normal
-[3] Hard
-[4] Very Hard 
-    """)
     
-    choice = int(input("Enter your choice: "))
-    
-    if choice >= 1 and choice <= 4:
-        return choice
-    
-    diff_menu()
+    while True:
+        clear()
 
-# --------------------------------------------------------------------
+        print(DIFF_MENU)
+
+        try:
+            choice = int(input(f"{Style.BRIGHT}Enter your choice::> {Style.NORMAL}"))
+        
+        except ValueError:
+            clear()
+            continue
+    
+        if choice >= 1 and choice <= 4:
+            return choice
+
+
+def generate_report(name, mode_name, diff_name):
+    
+    msg = generate_msg(name, mode_name, diff_name, defeats)
+    console = Console()
+    
+    console.print(Panel(
+        msg,
+        title="[cyan bold] GAME REPORT",
+        subtitle="[cyan bold] >> FINAL NUMBER <<",
+        expand=False, 
+        style="white"
+    ))
+    print("\n")
+
+
+def final_menu(msg):
+    
+    while True:
+        
+        if msg.lower() == "try":
+            print(f"{Fore.RED}[-] Game Over! :(")
+        
+        choice = input(f"{Fore.YELLOW}[-] {msg} again? (y/n): ").lower()
+
+        if choice in ("y", "n"):
+            play_game() if choice == "y" else exit(0)
+            
 
 def is_winner(random_number, final_number, sub, max):
     
@@ -82,7 +84,7 @@ def is_winner(random_number, final_number, sub, max):
          
     else:
         return False
-# --------------------------------------------------------------------
+    
 
 def get_diff_name(tries):
     
@@ -96,8 +98,6 @@ def get_diff_name(tries):
     return diff_dict[tries]
 
 
-# --------------------------------------------------------------------
-
 def get_mode_mame(salt):
     
     mode_dict = {
@@ -107,89 +107,97 @@ def get_mode_mame(salt):
     
     return mode_dict[salt]
 
-# --------------------------------------------------------------------
 
 def play_game():
-    
     clear()
     
+    global defeats
+    
     max = 10
-    random = randint(1, max)
     name = get_name()
+    mode_name = get_mode_mame(salt)
+    diff_name = get_diff_name(tries)
+    random = randint(1, max)
     current_tries = tries
     level = 1
     
-    print(f"Hello, {name}!\nWelcome to Final Number!\n")
+    print(f"{Fore.GREEN}[#]{Fore.CYAN} Hello, {name}!")
+    print(f"{Fore.GREEN}[#]{Fore.CYAN} Welcome to Final Number! Good luck...{Fore.RESET}\n")
     
-    print(f"Mode: {get_mode_mame(salt)} (salt: {salt})")
-    print(f"Difficulty: {get_diff_name(tries)} (tries: {tries})")
+    table_md = Table(show_header=False)
+    table_md.add_column(style="green")
+    table_md.add_row(f"[bold][*] MODE: {mode_name} (salt={salt})")
+    table_md.add_row(f"[bold][*] DIFFICULTY: {diff_name} (tries={tries})")
     
+    console = Console()
+    console.print(table_md)
      
     while current_tries != 0:
         
-        print(f"\nLevel: {level}\nCurrent tries: {current_tries}")
-        # print(f"Random: {random}")
+        table_cm = Table(show_header=False)
+        table_cm.add_column(style="cyan")
+        table_cm.add_row(f"[bold][-] CURRENT TRIES: {current_tries}")
+        table_cm.add_row(f"[bold][-] MAX RANDOM: (1 - {max})")
+        table_cm.add_row(f"[bold][*] LEVEL: {level}")
         
-        final_number = int(input("\nFinal Number: "))
-        sub = int(input("\nSub: "))
-        # print(f"Result: {random-sub}")
+        console.print(table_cm)
         
-        if level != 5:
-            if(is_winner(random, final_number, sub, max)):
+        print(f"\n{Style.BRIGHT}[x] Random: {random}{Style.NORMAL}\n")
         
-                current_tries = tries
-                max += salt
-                random = randint(1, max)
-                level += 1
-                
+        try:
+            final_number = int(input(f"{Style.BRIGHT}[x] Final Number::> "))
+            
+            if final_number <= 0 or final_number > max:
                 clear()
-        
-            else:
-                current_tries -= 1
-                clear()
-                print("\nyou fail !\n")
-                
-        else:
+                continue
+            
+            sub = int(input(f"[x] Sub::> "))
+            
+        except ValueError:
             clear()
-            print("Congratulations!")
-            
-            choice = input("Try again? [y/n]: ")
-            
-            if choice.lower() == "y":
-                play_game()
-    
-            else:
-                exit(0)
+            continue
         
-    
-    print("Gamer Over!  ): ")
-    choice = input("Try again? [y/n]: ")
-    
-    if choice.lower() == "y":
-        play_game()
-    
-    else:
-        exit(0)
-    
-    
+        if(is_winner(random, final_number, sub, max)):
+            current_tries = tries
+            max += salt
+            random = randint(1, max)
+            level += 1
+           
+            clear()
+            
+            if level == 5+1: 
+                generate_report(name, mode_name, diff_name)
+                final_menu("Play")
 
+        else:
+            current_tries -= 1
+            defeats += 1
+            
+            clear()
+            print(f"{Style.NORMAL}{Fore.RED}[-] You failed! :(\n{Fore.RESET}")
         
-# ------------------ CÓDIGO PRINCIPAL ------------------------ #
+    final_menu("Try")
+
 
 if __name__ == "__main__":
     
     if parsing():
-        print("Your name has been updated successfully!")
+        print(f"{Fore.CYAN}Your name has been updated successfully!{Fore.RESET}")
+        exit(0)
         
     diff_list = [5, 3, 2, 1]
     salt_list = [2, 10]
     
-    choice = 0
-    
-    while choice != 4:
+    while True:
         
         menu()
-        choice = int(input("Enter your choice: "))
+        
+        try:
+            choice = int(input(f"{Style.BRIGHT}Enter your choice::> {Style.NORMAL}"))
+        
+        except ValueError:
+            clear()
+            continue
     
         if choice == 1 or choice == 2:
             tries = diff_list[diff_menu()-1]
@@ -202,10 +210,4 @@ if __name__ == "__main__":
 
         elif choice == 4:
             exit(0)
-            
-        else:
-            clear()
-            continue
     
-    
-# --------------------------------------------------------------------
