@@ -1,10 +1,7 @@
-# Obter e atualizar o nome no arquivo de configuração JSON
-# Tratar os parâmetros passados pelo usuário
-
 import json
 import argparse
 
-PATH="../config/config.json"
+PATH="config/config.json"
 
 def get_name():
     
