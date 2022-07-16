@@ -20,7 +20,7 @@ def help():
 
     with open(PATH, "r") as file:
         for line in file.readlines():
-            print(line)
+            print(line, end="")
     
     exit(0)
     
@@ -142,10 +142,10 @@ def play_game():
         
         console.print(table_cm)
         
-        print(f"\n{Style.BRIGHT}[x] Random: {random}{Style.NORMAL}\n")
+        # print(f"\n{Style.BRIGHT}[x] Random: {random}{Style.NORMAL}\n") # Remove this comment to activate the cheat 
         
         try:
-            final_number = int(input(f"{Style.BRIGHT}[x] Final Number::> "))
+            final_number = int(input(f"{Style.BRIGHT}\n[x] Final Number::> "))
             
             if final_number <= 0 or final_number > max:
                 clear()
