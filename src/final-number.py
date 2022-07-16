@@ -11,7 +11,7 @@ from utils import *
 PATH="../docs/rules.txt"
 
 tries = 0
-salt = 0
+jump = 0
 defeats = 0
 
 
@@ -98,14 +98,14 @@ def get_diff_name(tries):
     return diff_dict[tries]
 
 
-def get_mode_mame(salt):
+def get_mode_mame(jump):
     
     mode_dict = {
         2:"Casual Mode",
         10:"Extreme Mode"
     }
     
-    return mode_dict[salt]
+    return mode_dict[jump]
 
 
 def play_game():
@@ -115,7 +115,7 @@ def play_game():
     
     max = 10
     name = get_name()
-    mode_name = get_mode_mame(salt)
+    mode_name = get_mode_mame(jump)
     diff_name = get_diff_name(tries)
     random = randint(1, max)
     current_tries = tries
@@ -126,7 +126,7 @@ def play_game():
     
     table_md = Table(show_header=False)
     table_md.add_column(style="green")
-    table_md.add_row(f"[bold][*] MODE: {mode_name} (salt={salt})")
+    table_md.add_row(f"[bold][*] MODE: {mode_name} (jump={jump})")
     table_md.add_row(f"[bold][*] DIFFICULTY: {diff_name} (tries={tries})")
     
     console = Console()
@@ -159,7 +159,7 @@ def play_game():
         
         if(is_winner(random, final_number, sub, max)):
             current_tries = tries
-            max += salt
+            max += jump
             random = randint(1, max)
             level += 1
            
@@ -186,7 +186,7 @@ if __name__ == "__main__":
         exit(0)
         
     diff_list = [5, 3, 2, 1]
-    salt_list = [2, 10]
+    jump_list = [2, 10]
     
     while True:
         
@@ -201,7 +201,7 @@ if __name__ == "__main__":
     
         if choice == 1 or choice == 2:
             tries = diff_list[diff_menu()-1]
-            salt = salt_list[choice-1]
+            jump = jump_list[choice-1]
 
             play_game()
 
