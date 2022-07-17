@@ -1,9 +1,13 @@
 import json
 import argparse
+from os import path
 
-PATH="config/config.json"
+PATH="config.json"
 
 def get_name():
+    
+    if not path.exists(PATH):
+        update_name("Unknown_Player")
     
     with open(PATH, "r") as file:
         dict_json = json.load(file)
@@ -19,7 +23,6 @@ def update_name(new_name):
         
     return True
         
-
 def parsing():
     
     parser = argparse.ArgumentParser(prog="final-number")
