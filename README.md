@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/risfhm/Final-Number"><img width="400" height="60" src="docs/assets/logo.png" alt='HTTPX'></a>
+  <a href="https://github.com/risfhm/Final-Number"><img width="400" height="60" src="docs/assets/logo.png" alt='Final Number - Logo'></a>
 </p><br>
 
 <p align="center"><strong>Final Number</strong> <em>- An unfunny game</em></p>
@@ -30,7 +30,7 @@ $ pip install -r requirements.txt
 ```shell
 $ git clone https://github.com/risfhm/Final-Number
 $ cd Final-Number/src
-$ python3 final_number.py
+$ python3 final-number.py
 ```
 
 ## Usage
