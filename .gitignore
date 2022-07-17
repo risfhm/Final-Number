@@ -1,3 +1,4 @@
 notes.txt
 src/__pycache__
+src/*.json
 venv
