@@ -35,4 +35,4 @@ $ python3 final-number.py
 
 ## Usage
 
-The usability of this game plus its internal features and functionality are described in its **[documentation](https://github.com/risfhm/Final-Number/docs/rules.md)**.
+The usability of this game plus its internal features and functionality are described in its **[documentation](https://github.com/risfhm/Final-Number/blob/main/docs/rules.md)**.
