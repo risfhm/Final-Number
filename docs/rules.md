@@ -69,3 +69,6 @@ There is a system of modes, difficulty and levels to turn the game into somethin
 <p align="center">
  <img src="assets/ex2.png" alt='JSON - Final Number'>
 </p>
+
+
+Read more: `final-number.py --help`
