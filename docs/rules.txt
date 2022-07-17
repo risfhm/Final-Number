@@ -70,7 +70,7 @@
 
   > There is a naming and swapping system in the game where a player can choose any name to be represented 
     during the game in the necessary reports and messages.If you want to learn more about this feature, go 
-    to the documentation at <https://github.com/>
+    to the documentation at <https://github.com/risfhm/Final-Number/blob/main/docs/rules.md>
       
 
-- Learn more: <https://github.com/>
+- Learn more: <https://github.com/risfhm/Final-Number>
