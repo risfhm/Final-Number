@@ -1,15 +1,18 @@
 <p align="center">
   <a href="https://github.com/risfhm/Final-Number"><img width="400" height="60" src="docs/assets/logo.png" alt='Final Number - Logo'></a>
-</p><br>
+</p>
 
 <p align="center"><strong>Final Number</strong> <em>- An unfunny game</em></p>
 
 <p align="center">
-<a href="https://github.com/encode/httpx/actions">
-    <img src="https://github.com/encode/httpx/workflows/Test%20Suite/badge.svg" alt="Test Suite">
+<a href="https://mit-license.org/">
+    <img src="https://img.shields.io/github/license/risfhm/Final-Number" alt="MIT License">
 </a>
-<a href="https://pypi.org/project/httpx/">
-    <img src="https://badge.fury.io/py/httpx.svg" alt="Package version">
+<a href="">
+    <img src="https://img.shields.io/github/languages/code-size/risfhm/Final-Number" alt="Code size">
+</a>
+<a href="">
+    <img src="https://img.shields.io/github/last-commit/risfhm/Final-Number" alt="Github last commit">
 </a>
 </p>
 
